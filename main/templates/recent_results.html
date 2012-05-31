@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}{{username}}'s Recent Results ({{skips.current}}){% endblock %}
+{% block heading %}{{username}}'s Recent Results{% endblock %}
+{% block content %}
+{% if skips.forward %}
+    <a href="./?skip={{skips.forward}}">&lt;&lt;</a>
+{% endif %}
+{{skips.current}}
+{% if skips.backward %}
+    <a href="./?skip={{skips.backward}}">&gt;&gt;</a>
+{% endif %}
+
+<table width="100%" class="result_overview" style="font-size: .8em">
+  <thead>
+    <tr>
+      <th>Task</th>
+      <th>Your Result</th>
+      <th>Response</th>
+      <th>Annotator</th>
+      <th>Project Type</th>
+      <th>Annotated</th>
+      <th>Merged</th>
+    </tr>
+  </thead>
+  {% for r in results %}
+  <tbody class="task_row_group">
+    {% with span=r.responses|length %}
+    {% for response in r.responses %}
+    <tr>
+      {% if forloop.first %}
+      <td rowspan="{{ span }}">
+	<a href="{% url main.views.task.task_view r.result.task.id %}">{{ r.result.task.id }}</a>
+      </td>
+      <td rowspan="{{ span }}">{{ r.result_summary }}</td>
+      {% endif %}
+      <td class="match-{{response.match}}">{{ response.response_summary }}</td>
+      <td class="match-{{response.match}}">{{ response.response.user }}</td>
+      {% if forloop.first %}
+      <td rowspan="{{ span }}">{{ r.project_type }}</td>
+      {% endif %}
+      <td>{{ response.response.end_time|date:"Y-m-d" }}<br />
+	<small>({{ response.response.end_time|timesince }} ago)</small></td>
+      {% if forloop.first %}
+      <td rowspan="{{ span }}">{{ r.result.end_time|date:"Y-m-d" }}<br />
+	<small>({{ r.result.end_time|timesince }} ago)</small></td>
+      {% endif %}
+    </tr>
+    {% endfor %}
+    {% endwith %}
+  </tbody>
+  {% endfor %}
+</table>
+{% endblock %}

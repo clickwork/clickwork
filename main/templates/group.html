@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}{{ name }} Group{% endblock %}
+{% block heading %}{{ name }} group details{% endblock %}
+{% block content %}
+{% if users %}
+<h2>User{{ users|length|pluralize }}</h2>
+<ul class="hlist">
+  {% for username in users %}
+  <li><a href="{% url main.views.overview.one_user username %}">{{ username }}</a></li>
+  {% endfor %}
+</ul>
+<h2>Email Addresses</h2>
+{% for email in emails %}
+  {{ email }} ; 
+{% endfor %}  
+{% else %}
+<h2>No users in this group</h2>
+{% endif %}
+
+{% if annotates %}
+<h2>Annotate permission for</h2>
+<ul>
+  {% for p in annotates %}
+  <li><a href="{% url main.views.overview.one_project p.id %}">{{ p.title }}</a></li>
+  {% endfor %}
+</ul>
+{% else %}
+<h2>This group may not annotate any projects</h2>
+{% endif %}
+
+{% if merges %}
+<h2>Merge permission for</h2>
+<ul>
+  {% for p in merges %}
+  <li><a href="{% url main.views.overview.one_project p.id %}">{{ p.title }}</a></li>
+  {% endfor %}
+</ul>
+{% else %}
+<h2>This group may not merge any projects</h2>
+{% endif %}
+{% endblock %}

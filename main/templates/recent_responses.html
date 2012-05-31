@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block title %}{{username}}'s Recent Responses ({{skips.current}}){% endblock %}
+{% block heading %}{{username}}'s Recent Responses{% endblock %}
+{% block content %}
+{% if skips.forward %}
+    <a href="./?skip={{skips.forward}}">&lt;&lt;</a>
+{% endif %}
+{{skips.current}}
+{% if skips.backward %}
+    <a href="./?skip={{skips.backward}}">&gt;&gt;</a>
+{% endif %}
+
+<table width="100%" style="font-size: .8em" >
+<tr>
+  <th>
+    Task
+  </th>
+  <th>
+    Your Response
+  </th>
+  <th>
+    Merged Response
+  </th>
+  <th>
+    Merger
+  </th>
+  <th>
+    Project Type
+  </th> 
+  <th>
+    Tagged
+  </th>
+  <th>
+    Merged
+  </th>
+  <th>
+    View
+  </th>
+</tr>  
+{% for response in responses %}
+<tr class="match-{{response.match}}">
+  <td>
+  {% if user.is_superuser %}
+  <a href="{% url main.views.task.task_view response.response.task.id %}">{{ response.response.task.id }}</a>
+  {% else %}
+  {{ response.response.task.id }}
+  {% endif %}
+  <br />
+  <small>{{ response.task_summary|truncatewords:3 }}</small>
+  </td>
+  <td>{{ response.response_summary }}</td>
+  <td>{{ response.result_summary }} </td>
+  <td>{{ response.response.task.result.user.username }}</td>
+  <td>{{ response.project_type }}</td>
+  <td>{{response.response.end_time|date:"Y-m-d"}}<br /><small>({{response.response.end_time|timesince}} ago)</small></td>
+  <td>{{response.response.task.result.end_time|date:"Y-m-d"}}<br /><small>({{response.response.task.result.end_time|timesince}} ago)</small></td>
+  <td><a href="{% url main.views.task.task_adhoc_review %}?response={{response.response.id}}">View</a></td>
+</tr>  
+{% endfor %}
+</table>
+{% endblock %}

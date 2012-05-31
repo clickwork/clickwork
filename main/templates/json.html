@@ -1,0 +1,13 @@
+{# $Id$ #}
+{% extends "base.html" %}
+{% block title %}Data{% endblock %}
+{% block heading %}Data dump page{% endblock %}
+{% block content %}
+<p>There is no HTML template for displaying the following data in a
+  user-friendly fashion.  It is reproduced here for debugging purposes.
+  If you do not understand what it means, please contact an
+  administrator.</p>
+<blockquote><pre class="json_dump">
+{{ json }}
+</pre></blockquote>
+{% endblock %}

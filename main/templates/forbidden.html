@@ -1,0 +1,7 @@
+{# $Id$ #}
+{% extends "base.html" %}
+{% block title %}403 &mdash; Forbidden{% endblock %}
+{% block heading %}403 &mdash; Forbidden{% endblock %}
+{% block content %}
+<div class="forbidden_message">{{ forbidden_message|safe }}</div>
+{% endblock %}

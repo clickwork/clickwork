@@ -1,0 +1,48 @@
+{# $Id$ #}
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block heading %}Welcome to Clickwork{% endblock %}
+{% block content %}
+{% if recent_responses %}
+<div id="recent_tasks">
+  {% if recent_results %}
+  <h3>Recently Merged</h3>
+  <ul>
+    {% for result in recent_results %}
+    <li><a href="/task/{{result.task.id}}/">{{result.task.id}}</a>, {{result.end_time|timesince}} ago</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+  <h3>Recently Annotated</h3>
+  <ul>
+    {% for response in recent_responses %}
+    <li><a href="/task/{{response.task.id}}/">{{response.task.id}}</a>, {{response.end_time|timesince}} ago</li>
+    {% endfor %}
+  </ul>  
+</div>  
+{% endif %}    
+  {% if messages %}
+      <div id="messages">
+      {% for message in messages %}
+        <p>{{ message.text }}</p>
+      {% endfor %}
+      </div>
+  {% endif %}    
+{{ reviews.count }} task{{reviews.count|pluralize}} to review;
+~{{ respondable_task_count }} task{{respondable_task_count|pluralize}} to tag;
+~{{ resolvable_task_count }} task{{resolvable_task_count|pluralize}} to merge.
+<br />
+<div id="site_map">
+  {% regroup pages by category as page_categories %}
+  {% for category in page_categories %}
+  <div class="site_map_category">
+    <h2>{{ category.grouper }}</h2>
+    <ul>
+      {% for item in category.list %}
+      <li><a href="{{ item.url }}">{{ item.description }}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %} 

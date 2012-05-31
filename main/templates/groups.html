@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}User groups{% endblock %}
+{% block heading %}Overview of all groups{% endblock %}
+{% block content %}
+{% for group in groups %}
+<h2><a href="{% url main.views.overview.one_group group.id %}">{{ group.name }} ({{ group.id }})</a></h2>
+{% if group.users %}
+<ul class="hlist">
+  {% for username in group.users %}
+  <li><a href="{% url main.views.overview.one_user username %}">{{ username }}</a></li>
+  {% endfor %}
+</ul>
+{% else %}
+<em>No users in this group</em>
+{% endif %}
+{% empty %}
+<h2>No groups in database</h2>
+{% endfor %}
+{% endblock %}

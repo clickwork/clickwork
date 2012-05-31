@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}{{ name }} User{% endblock %}
+{% block heading %}{{ name }} user details{% endblock %}
+{% block content %}
+{% if is_superuser %}
+<h2>This user is an admin</h2>
+{% endif %}
+
+{% if groups %}
+<h2>Group{{ groups|length|pluralize }}</h2>
+
+<p>Click on a group to see which projects its members can annotate
+and/or merge.</p>
+
+<ul class="hlist">
+  {% for group in groups %}
+  <li><a href="{% url main.views.overview.one_group group.id %}">{{ group.name }}</a></li>
+  {% endfor %}
+</ul>
+{% else %}
+<h2>This user does not belong to any groups</h2>
+{% endif %}
+
+<h2>Tasks</h2>
+
+<p>This user can annotate approximately {{ respondable_task_count }}
+tasks and merge approximately {{ resolvable_task_count }} tasks.</p>
+
+{% if recent_responses %}
+<h3>Tasks recently annotated</h3>
+<ul class="hlist">
+  {% for id in recent_responses %}
+  <li><a href="{% url main.views.task.task_view id %}">{{ id }}</a></li>
+  {% endfor %}
+</ul>
+You can compare your responses vs. the merger for recent tasks which have been merged: <a href="{% url main.views.user.recent_responses name %}">Recently Merged By Someone Else</a>
+{% endif %}
+
+{% if recent_results %}
+<h3>Tasks recently merged</h3>
+<ul class="hlist">
+  {% for id in recent_results %}
+  <li><a href="{% url main.views.task.task_view id %}">{{ id }}</a></li>
+  {% endfor %}
+</ul>
+You can compare your results vs. their annotators: <a href="{% url main.views.user.recent_results name %}">Recently Merged By You</a>
+{% endif %}
+
+{% if recent_reviews %}
+<h3>Tasks recently given back for review</h3>
+<ul class="hlist">
+  {% for id in recent_reviews %}
+  <li><a href="{% url main.views.task.task_review id %}">{{ id }}</a></li>
+  {% endfor %}
+</ul>
+{% endif %}
+
+{% endblock %}

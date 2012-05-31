@@ -1,0 +1,254 @@
+body {
+margin: 0px;
+font-family: Georgia, Minion, LucidaBright, Palatino, serif;
+}
+#mainnav {
+background: rgb(233,238,249);
+border: none;
+border-bottom: 1px solid #d7d7d7;
+ margin: .66em 0 .33em;
+ padding: .2em 0;
+ height: 10px;
+margin-top: 0px;
+}
+
+/* Accommodate our login info at the bottom of the page */
+#footer {
+border-bottom: 1px solid;
+padding-left: 10px;
+padding-right: 10px;
+}
+
+#header {
+background: #9D9FA1;
+color: #FFFFFF;
+font-family: "Trebuchet MS", Verdana, Lucida-Sans, Helvetica, Arial, sans-serif;
+font-size: 44px;
+text-shadow: 2px 2px 3px gray;
+height: 64px;
+padding: 4px 16px 0px 16px;
+vertical-align: top;
+}
+
+#browserWarning {
+    background: #6d87a1;
+    color: #fff;
+    font-family: "Trebuchet MS", Verdana, Lucida-Sans, Helvetica, Arial, sans-serif;
+    font-size: 32px;
+    text-shadow: 1px 1px 2px gray;
+    height: 45px;
+    padding: 4px 16px 0px 16px;
+    vertical-align: top;
+}
+
+#browserWarning p { margin: 0px; }
+
+#recent_tasks {
+    float: right;
+    width: 300px;
+    border-left: 1px solid black;
+    border-bottom: 1px solid black;
+    padding: 0px 10px;
+    margin: 0px 10px;
+}
+
+#recent_tasks h3 {
+    margin: 0px 0px 18px 0px;
+}
+
+.site_map_category h2 { margin-bottom: 5px; }
+.site_map_category ul { margin-top: 5px; padding-left: 0px; }
+.site_map_category li { display: inline; }
+.site_map_category li:last-child:after { content: ""; }
+.site_map_category li:after { content: " | "; }
+
+/*
+.hlist { padding-left: 0px; }
+
+dd .hlist { display: inline; }
+
+.hlist li {
+    display: inline;
+}
+
+.hlist li:last-child:after {
+    content: "";
+}
+
+.hlist li:after {
+    content: " | ";
+}
+*/
+h1 {
+   font-size: 100%;
+   margin: 0px;
+} 
+h1 a {
+   text-decoration: none;
+   color: white;
+}  
+#main {
+    padding: 10px; 
+}   
+
+#user {
+    float: right;
+    padding-right: 10px;
+}
+
+/* Timesheet stuff */
+table.timesheet {
+    empty-cells: hide;
+    padding-left: 6px;
+ }
+
+.timesheet tbody {
+    text-align: right;
+    vertical-align: text-top;
+}
+
+.timesheet tbody th { /* only the row headers */
+    text-align: left;
+}
+
+.timesheet tbody td {
+    padding: 0.5em;
+    border-width: 1;
+    border-style: solid;
+}
+
+.timesheet .totalwork {
+    font-style: italic;
+    padding-bottom: 0.25em
+}
+
+.timesheet .oneworktype .subhead {
+    text-decoration: underline;
+}
+
+.timesheet .oneworktype ul {
+    margin: 0em;
+    list-style: none;
+    padding-bottom: 0.25em;
+}
+
+#timesheet_form {
+    padding-left: 16px;
+}
+
+#timesheet_form ul {
+    padding-left: 0px;
+    padding-right: 0.5em;
+}
+
+#timesheet_form .errorlist {
+    color: red;
+    list-style-type: none;
+}
+
+#timesheet_form > ul > li {
+    display: inline;
+    list-style-type: none;
+}
+
+#timesheet_form > ul > li#non_field_errors {
+    display: block;
+}
+
+#timesheet_form > ul > li > ul {
+    list-style-type: none;
+    display: inline-block;
+    padding-top: 0px;
+}
+
+#timesheet_form label {
+    position: relative;
+    width: 12em;
+    display: block;
+    padding-bottom: 0.5em;
+}
+#timesheet_form input, #id_resolution {
+    position: absolute;
+    right: 0px;
+}
+#timesheet_form input[type=text] { width: 7em; }
+
+/* end timesheet stuff */
+
+td.has_num, th.has_num {
+    text-align: right;
+}
+
+#project_overview_table th { text-align: left; }
+#project_overview_table th.has_num { text-align: right; }
+
+#project_overview_table .sortarrow { float: right; padding-left: 5px; }
+#project_overview_table th.has_num .sortarrow { float: left; padding-right: 5px; }
+
+#project_overview_table th a { text-decoration: none; }
+
+#project_overview_table th, #project_overview_table td {
+    padding: 0.5em;
+    border-width: 1;
+    border-style: solid;
+}
+
+#project_overview_table a img { border: 0; }
+
+.result_overview {
+    border-collapse: collapse;
+}
+
+.result_overview td {
+    text-align: center;
+}
+
+.result_overview tbody.task_row_group {
+    padding: 0.5em;
+    border-width: 1;
+    border-style: solid;
+}
+    
+/* Tabbed navigation */
+.tabs li {
+    display: inline;
+    list-style: none;
+    padding-right: 2em;
+}
+
+/* cheap horizontal pipe-separated list */
+
+.hlist { padding-left: 0px; }
+
+dd .hlist { display: inline; }
+
+.hlist ul { display: inline; list-style-type: none; }
+
+.hlist li {
+    display: inline;
+}
+
+.hlist li:last-child:after {
+    content: "";
+}
+
+.hlist li:after {
+    content: " | ";
+}
+
+/* for the project page */
+
+.completedtask { font-style: italic; font-weight: normal; }
+.mergedtask { font-style: normal; font-weight: bold; }
+
+.match-False { background-color: yellow; }
+.match-True { background-color: lightgreen; }
+
+#messages {
+    border: 1px solid;
+    margin: 10px 350px 10px 15px;
+    padding: 10px 15px 10px 15px;
+    color: #00529B;
+    background-color: #BDE5F8;
+}
+

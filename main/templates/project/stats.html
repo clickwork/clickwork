@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+
+<table width="30%">
+<th>
+  User
+</th>
+<th>
+  Number of Tasks
+</th>  
+{% for response in user_response_counts %}
+<tr>
+  <td>{{response.user__username}}</td>
+  <td style="text-align:center">{{response.id__count}}</td>
+</tr>
+
+{% endfor %}
+</table>
+{% endblock %}

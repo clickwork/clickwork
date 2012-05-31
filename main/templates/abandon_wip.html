@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block content %}
+Are you sure you want to abandon your current work in progress?
+<form method="POST">{% csrf_token %}
+<input type="submit" value="Abandon" />
+</form>
+{% endblock %}

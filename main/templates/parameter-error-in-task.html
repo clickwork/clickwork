@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Bad form?{% endblock %}
+{% block heading %}Bad form?{% endblock %}
+{% block content %}
+<p>
+  Please hit the "back" button and recheck the form you submitted.
+  You may have missed something.  If you think you are doing
+  everything right, please send an administrator the following
+  information:
+</p>
+<h2>Task</h2>
+<p>{{ task }}</p>
+<h2>Exception</h2>
+<p>{{ exc_value }}</p>
+<table>
+  <tr>
+    <th>file</th>
+    <th>line</th>
+    <th>function</th>
+    <th>code</th>
+  </tr>
+  {% for file, line, function, code in traceback %}
+  <tr>
+    <td style="font-size: smaller;">{{ file }}</td>
+    <td style="text-align: right;">{{ line }}</td>
+    <td>{{ function }}</td>
+    <td><tt>{{ code }}</tt></td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

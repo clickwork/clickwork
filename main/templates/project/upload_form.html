@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Upload / Empty{% endblock %}
+{% block heading %}Upload to Project / Empty Project{% endblock %}
+{% block content %}
+<form enctype="multipart/form-data" method="post">{% csrf_token %}
+<table>
+{{ form }}
+</table>
+<input type="submit" name="action" value="Upload" title="Upload the file to the project." />
+<input type="submit" name="action" value="Empty" title="Remove all tasks from the project." />
+</form>
+{% endblock %}

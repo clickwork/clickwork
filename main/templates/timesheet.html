@@ -1,0 +1,97 @@
+{# $Id: home.html 107207 2010-07-27 20:34:00Z crschmidt $ #}
+{% extends "base.html" %}
+{% load timesheet_tags %}
+{% block title %}Timesheet {% if periods %}({{ periods }} {{ resolution }}{{ periods|pluralize }}){% endif %}{% endblock %}
+{% block heading %}Timesheet{% endblock %}
+{% block content %}
+
+{% if headers %}
+<table class="timesheet">
+  <colgroup>
+  </colgroup>
+  <colgroup span="{{ headers|length }}">
+  </colgroup>
+  <thead>
+    <tr>
+      <th/>
+      {% for header in headers %}
+      <th>{{ header }}</th>
+      {% endfor %}
+    </tr>
+  </thead>
+  <tbody>
+    {% for row in rows %}
+    <tr>
+      <th>{{ row.user }}</th>
+      {% for cell in row.cells %}
+      <td>
+	{% if cell.work_time > 0 %}
+	<div class="totalwork">Total work {{ cell.work_time|as_hms }}</div>
+	{% for ds in cell.data_sets %}
+	<div class="oneworktype"><div class="subhead">{{ ds.task_type }} {{ ds.work_time|as_hms }}</div>
+	  <ul>
+	    {% if ds.tagging_time_average %}
+	    <li>Tag avg {{ ds.tagging_time_average|as_hms }}</li>
+	    {% endif %}
+	    {% if ds.merging_time_average %}
+	    <li>Merge avg {{ ds.merging_time_average|as_hms }}</li>
+	    {% endif %}
+	    {% if ds.tagging_time_median %}
+	    <li>Tag med {{ ds.tagging_time_median|as_hms }}</li>
+	    {% endif %}
+	    {% if ds.merging_time_median %}
+	    <li>Merge med {{ ds.merging_time_median|as_hms }}</li>
+	    {% endif %}
+	  </ul>
+	</div>
+	{% endfor %}
+	{% endif %}
+      </td>
+      {% endfor %}
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endif %}
+
+<form id="timesheet_form" action="#" method="GET">
+  <ul>
+    <li id="non_field_errors">{{ form.non_field_errors }}</li>
+    <li>
+      <ul>
+        <li>Users</li>
+        <li>{{ form.users.errors }}</li>
+        <li>{{ form.users }}</li>
+      </ul>
+    <li>
+      <ul>
+        <li>Groups</li>
+        <li>{{ form.groups.errors }}</li>
+        <li>{{ form.groups }}</li>
+      </ul>
+    </li>
+    <li>
+      <ul id="small_input_list">
+        <li>{{ form.periods.errors }}</li>
+        <li>
+          <label>Periods {{ form.periods }}
+          </label>
+        </li>
+        <li>{{ form.resolution.errors }}</li>
+        <li>
+          <label>Resolution {{ form.resolution }}
+          </label>
+        </li>
+        <li>{{ form.ending_date.errors }}</li>
+        <li>
+          <label>
+            Ending date {{ form.ending_date }}
+          </label>
+        </li>
+        <li><label><input type="submit"
+                          value="Generate timesheet" /></label></li>
+      </ul>
+    </li>
+  </ul>
+</form>
+{% endblock %}

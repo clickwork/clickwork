@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Brief overview{% endblock %}
+{% block heading %}Brief overview of all projects{% endblock %}
+{% block headstuff %}
+<script src="/static/js/sortable/sortable_us.js"></script>
+{% endblock %}
+{% block content %}
+{% include "tag-filter.html" %}
+<table class="sortable" id="project_overview_table">
+  <tr>
+    <th class="has_num">id</th>
+    <th>type</th>
+    <th>priority</th>
+    <th>title</th>
+    <th class="has_num">to tag</th>
+    <th class="has_num">to merge</th>
+    <th class="has_num">merged</th>
+  </tr>
+  {% for project in project_list %}
+  <tr>
+    <td class="has_num">{{ project.id }}</td>
+    <td>{{ project.type }}</td>
+    <td>{{ project.priority }} ({{project.priority_display}})</td>
+    <td><a href="{% url main.views.overview.one_project project.id %}">{{ project.title }}</a></td>
+    <td class="has_num">{{ project.remaining_to_tag }}</td>
+    <td class="has_num">{{ project.remaining_to_merge }}</td>
+    <td class="has_num">{{ project.merged }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

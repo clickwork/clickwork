@@ -1,0 +1,38 @@
+{# $Id$ #}
+<html>
+ <head>
+   <title>{% block title %}Untitled Page{% endblock %} &#x2014; Clickwork</title>
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+   <link rel="stylesheet" href="/static/website.css" type="text/css" />
+   <link rel="shortcut icon" href="/static/favicon.ico" />
+   {% block headstuff %}
+   {% endblock %}
+ </head>
+ <body>
+ <div id="browserWarning">
+   <i>This Web site does not support Internet Explorer.</i>
+ </div>
+ <script>
+   var elem = document.getElementById("browserWarning");
+   if (navigator.userAgent.indexOf("MSIE") == -1)
+     elem.style.display = "none";
+ </script>
+ <div id="header">
+   <h1><a href="/">{% block heading %}Clickwork{% endblock %}</a></h1>
+ </div>
+  {% if not user.is_anonymous %}
+   <div id="user">Logged in as <a href="/user/{{user}}/">{{user}}</a> | 
+     <a href="{% url user_management.views.change_password %}">Change password</a> |
+     <a href="/accounts/logout/">Logout</a></div>
+  {% else %}
+    <div id="user"><a href="/accounts/login/">Login</a></div>
+  {% endif %} 
+ <div id="mainnav" class="nav">
+ </div>
+ <div id="main">
+ {% block content %}
+ {% endblock %}
+ </div>
+ </body>
+</html> 
+

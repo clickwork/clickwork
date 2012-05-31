@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block title %}{{ project.title }} Project{% endblock %}
+{% block heading %}{{ project.title }} ({{ project.id }}){% endblock %}
+{% block content %}
+{% include "project-info-snippet.html" %}
+<h2>Status</h2>
+<table width="50%">
+  <tr>
+    <td>Assignments Completed</td>
+    <td> Number of tasks</td>
+  </tr>  
+{% for assignment in assignments %}
+  <tr>
+    <th>
+      {{ assignment.completed_assignments }}
+    </th>
+    <td>
+      {{ assignment.howmany }}
+    </td>
+  </tr>
+{% endfor %}
+</table>
+<h2>Links</h2>
+<ul>
+  <li><a href="stats/">Project Stats</a></li>
+  <li><a href="agreement/">Project Agreement</a></li>
+  <li><a href="upload/">Upload or Clean Out Data</a></li>
+  <li><a href="export/">Export Data</a></li>
+</ul>
+
+{% if show_tasks %}
+<h2>Task{{ tasks|length|pluralize }}</h2>
+<p>
+  Links to completed but unmerged tasks look
+  <a href="#" class="completedtask">like this</a>
+  and links to merged tasks are
+  <a href="#" class="mergedtask">like this</a>.
+</p>
+<ul class="hlist">
+  {% for task in tasks %}
+  <li>
+    <a 
+       {% if task.merged %}
+       class="mergedtask"
+       {% else %}{% if task.completed %}
+       class="completedtask"
+       {% endif %}{% endif %}
+       href="{{ task.url }}">{{ task.id }}</a>
+  </li>
+  {% empty %}
+  <li><b>No tasks in this project</b></li>
+  {% endfor %}
+</ul>
+{% endif %}
+
+<h2>Uploads</h2>
+<ul>
+{% for upload in uploads %}
+  <li><a href="{{upload.upload.url}}">{{upload.upload.name}}</a></li>
+{%endfor %}
+</ul>
+{% endblock %}

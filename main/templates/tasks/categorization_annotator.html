@@ -1,0 +1,15 @@
+<html><head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head><body>
+  <form name="mturk_form" method="post" id="mturk_form" action="/project/{{task.project.id}}/task/{{task.id}}/">{% csrf_token %}
+    <input type="hidden" value="" name="assignmentId" id="assignmentId" value="{{task.id}}" /><table>
+    <tbody>
+
+{% for query in queries %}
+  {{ query|safe }}
+{% endfor %}  
+    </tbody>
+</table><p>
+<input type="hidden" name="total_failures" id="total_failures" value=""/>
+<input type="submit" id="submitButton" value="Submit" /></p></form><script language="Javascript">turkSetAssignmentID();</script></body></html>

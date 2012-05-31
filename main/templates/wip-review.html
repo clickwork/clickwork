@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Work in Progress{% endblock %}
+{% block heading %}Review work in progress{% endblock %}
+{% block content %}
+<p>
+  If you are an admin of one or more projects, this page shows all the
+  works-in-progress for those projects.  If you are a superuser for
+  the site, this page shows all the works-in-progress for the site.
+</p>
+<form id="wip_review" method="POST" action="#">{% csrf_token %}
+  <table>
+    <tr>
+      <th>Project</th>
+      <th>Task</th>
+      <th>User</th>
+      <th>Time started</th>
+      <th></th>
+      <th>Delete?</th>
+    </tr>
+    {% for wip in wips %}
+    <tr>
+      <td><a href="{{ wip.project_url }}">{{ wip.project_name }}</a></td>
+      <td><a href="{{ wip.task_url }}">{{ wip.task_id }}</a></td>
+      <td><label for="wip_{{wip.id}}">{{ wip.user }}</label></td>
+      <td><label for="wip_{{wip.id}}">{{ wip.start_time|date:"l, F j, g:i a T"}}</label></td>
+      <td><label for="wip_{{wip.id}}">({{ wip.start_time|timesince }} ago)</label></td>
+      <td><input id="wip_{{wip.id}}" type="checkbox" name="wips_to_delete"
+		 value="{{wip.id}}" /></td>
+    </tr>
+    {% endfor %}
+    <tr><td colspan="5">
+	<input type="submit" value="Delete checked WIPs" />
+	<input type="reset" value="Reset this form" />
+    </td></tr>
+  </table>
+</form>
+{% endblock %}

@@ -1,0 +1,45 @@
+<h2><a href="{{ project.url }}">{{ project.title }} ({{ project.id }})</a></h2>
+<dl>
+  <dt>Admin</dt> <dd>{{ project.admin }} (<a href="/admin/main/project/{{project.id}}">Edit</a>)</dd>
+  <dt>Priority</dt> <dd>{{ project.priority }}</dd>
+  {% if project.tags %}
+  <dt>Tag{{ tags|length|pluralize }}</dt>
+  <dd><ul class="hlist">
+      {% for tag in project.tags %}<li>{{ tag }}</li>{% endfor %}
+  </ul></dd>
+  {% else %}
+  <dt><em>Untagged</em></dt>
+  {% endif %}
+  {% if project.annotator_groups %}
+  <dt>Annotator group{{ project.annotator_groups|length|pluralize }}</dt>
+  <dd><ul class="hlist">
+      {% for group in project.annotator_groups %}
+      <li><a href="{% url main.views.overview.one_group group.id %}">{{ group.name }}</a></li>
+      {% endfor %}
+  </ul></dd>
+  <dt>Annotator{{ project.annotators|length|pluralize }}</dt>
+  <dd><ul class="hlist">
+      {% for username in project.annotators %}
+      <li><a href="{% url main.views.overview.one_user username %}">{{ username }}</a></li>
+      {% endfor %}
+  </ul></dd>
+  {% else %}
+  <dt><em>No annotator groups for this project</em></dt>
+  {% endif %}
+  {% if project.merger_groups %}
+  <dt>Merger group{{ project.merger_groups|length|pluralize }}</dt>
+  <dd><ul class="hlist">
+      {% for group in project.merger_groups %}
+      <li><a href="{% url main.views.overview.one_group group.id %}">{{ group.name }}</a></li>
+      {% endfor %}
+  </ul></dd>
+  <dt>Merger{{ project.mergers|length|pluralize }}</dt>
+  <dd><ul class="hlist">
+      {% for username in project.mergers %}
+      <li><a href="{% url main.views.overview.one_user username %}">{{ username }}</a></li>
+      {% endfor %}
+  </ul></dd>
+  {% else %}
+  <dt><em>No merger groups for this project</em></dt>
+  {% endif %}
+</dl>

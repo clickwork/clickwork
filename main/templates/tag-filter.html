@@ -1,0 +1,11 @@
+<form class="tag_filter" method="GET" action="#">
+  <select id="tag_selector" name="filter" multiple="multiple">
+    {% for tag in available_tags %}
+    <option value="{{ tag.name }}"
+            {% if tag.name in selected_tags %}selected{% endif %}>
+      {{ tag.name }}
+    </option>
+    {% endfor %}
+  </select>
+  <input type="submit" value="Filter on the selected tags" />
+</form>

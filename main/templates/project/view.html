@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}{{project.title}} (Project){% endblock %}
+{% block content %}
+<h1>{{ project.title }}</h1>
+<p>
+  {{project.description}}
+</p>  
+<b>Admin</b>: {{project.admin.username}} <small>(<a href="/admin/main/project/{{project.id}}/">Edit</a>)</small><br />
+<b>Annotators</b>: {{project.annotator_count}}
+
+<p>If you wish to download the current state of this project, you can export it.</p>
+<form action="export/">
+  <input type="submit" value="Export" />
+</form>  
+
+Links:
+<ul>
+  <li><a href="stats/">Project Stats</a></li>
+  <li><a href="agreement/">Project Agreement</a></li>
+</ul>
+
+<table width="50%">
+  <tr>
+    <td>Assignments Completed</td>
+    <td> Number of tasks</td>
+  </tr>  
+{% for assignment in assignments %}
+  <tr>
+    <th>
+      {{ assignment.completed_assignments }}
+    </th>
+    <td>
+      {{ assignment.id__count }}
+    </td>
+  </tr>
+{% endfor %}
+</table>
+
+<h2>Uploads</h2>
+<ul>
+{% for upload in uploads %}
+  <li><a href="{{upload.upload.url}}">{{upload.upload.name}}</a></li>
+{%endfor %}
+</ul>
+
+{% endblock %}

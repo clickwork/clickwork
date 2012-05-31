@@ -1,0 +1,7 @@
+{# $Id$ #}
+{% extends "base.html" %}
+{% block title %}500 &mdash; Server Error{% endblock %}
+{% block heading %}{{ error_heading|safe }}{% endblock %}
+{% block content %}
+<div class="error_message">{{ error_message|safe }}</div>
+{% endblock %}

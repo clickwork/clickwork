@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Simple annotation{% endblock %}
+{% block heading %}Simple annotation{% endblock %}
+{% block content %}
+<form method="POST" action="/abandon/">{% csrf_token %}If stopping work, please click this button: <input type="submit" value="Stop Working" /></form>
+<hr />
+<h1>{{question}}</h1>
+
+<form action="" method="POST">{% csrf_token %}
+  <p><input type="text" name="answer" /></p>
+  <p>
+    Comments (not required):
+    <textarea cols="80" rows="5" name="comment"></textarea>
+  </p>
+  <p>
+    <input type="submit" value="Save" />
+  </p>
+</form>
+{% endblock %}

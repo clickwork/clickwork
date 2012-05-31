@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Users{% endblock %}
+{% block heading %}Overview of users{% endblock %}
+{% block content %}
+{% for user in users %}
+<h2>
+  <a href="{% url main.views.overview.one_user user.name %}">{{ user.name }}</a>
+  {% if user.is_superuser %}
+  <em>(admin)</em>
+  {% endif %}
+</h2>
+<p>Annotated {{ user.annotated }} task{{ user.annotated|pluralize }}; merged {{ user.merged }} task{{ user.merged|pluralize }}.</p>
+{% empty %}
+<h2>No users in the database</h2>
+{% endfor %}
+{% endblock %}

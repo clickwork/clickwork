@@ -1,0 +1,4 @@
+*~
+*.pyc
+uploads/
+/local_settings.py
