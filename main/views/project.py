@@ -11,7 +11,7 @@ from django.conf import settings
 from main.views.overview import one_project
 from main.wrapper import get, get_or_post, RequestGuts, TemplateResponse, \
     DefaultResponse, AttachmentResponse, ForbiddenResponse, ErrorResponse, ViewResponse
-from main.helpers import get_project_type
+from main.helpers import get_project_type, http_basic_auth
 from django.template.loader import get_template
 from django.db.models import Count
 import django.utils.html
@@ -137,6 +137,7 @@ def project_upload(get, guts, project):
 # TODO: Our current exports are all well-served by using a string
 # for each task, and combining them into a zipfile. It's possible this
 # is not generic enough.
+@http_basic_auth
 @login_required
 @get
 @project_owner_required
