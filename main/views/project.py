@@ -79,6 +79,7 @@ def project_agreement(guts, project):
     print same_counts ## TODO: is this leftover debugging code?
     return TemplateResponse(template, {'counts': same_counts, 'task_count': tasks.count()})
 
+@http_basic_auth
 @login_required
 @get_or_post
 @project_owner_required
