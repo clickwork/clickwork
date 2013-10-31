@@ -61,6 +61,7 @@ def project_api(guts, url):
     """Call the project's dispatcher function, based on the URL, and request."""
     pass
 
+@http_basic_auth
 @login_required
 @get
 @project_owner_required
@@ -194,6 +195,7 @@ def project_export(guts, project):
     return AttachmentResponse("project-%s.zip" % project.id,
                               "application/zip", buffer.read())
 
+@http_basic_auth
 @login_required
 @get
 @project_owner_required
