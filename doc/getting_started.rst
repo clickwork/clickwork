@@ -14,7 +14,7 @@ python-markdown.)
 
 Once you've done that, you can check out Clickwork::
 
-   $ git clone git@github.com:<not-yet-known>/clickwork.git
+   $ git clone https://github.com/clickwork/clickwork.git
    
 Edit your local_settings.py file (inside clickwork) to set your 
 BASE_PATH; this path should match the file location of your current
