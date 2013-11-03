@@ -286,7 +286,7 @@ class Task(models.Model):
         abstract()
     def handle_unmerge(self):
         """Undo a merge, if this project has been merged."""
-        abstract()
+        self.result.delete()
 
     ## NEW API (see CW-40)
     def template(self):
