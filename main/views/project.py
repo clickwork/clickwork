@@ -39,7 +39,7 @@ def project_owner_required(f):
         else:
             raise TypeError("Unexpected arguments: %r" % args)
         guts = args[guts_index]
-	project = get_object_or_404(Project, pk=args[project_index])
+        project = get_object_or_404(Project, pk=args[project_index])
         if guts.user.is_superuser or guts.user == project.admin:
             new_args = list(args)
             new_args[project_index] = project
